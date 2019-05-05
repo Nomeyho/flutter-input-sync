@@ -15,7 +15,12 @@ The layout is pretty straightforward. We have a title (`Text`) and two inputs fi
 (`TextField`) wrapped in a `Column` widget. The first input field is used to enter the amount of euros
 and the second one to enter the mount of USD.
 
-![layout](https://github.com/Nomeyho/flutter-input-sync/raw/master/article/layout.png "Layout")
+<p align="center">
+  <img height="200"
+       src="https://github.com/Nomeyho/flutter-input-sync/raw/master/article/layout.png"
+       alt="layout"
+  />
+</p>
 
 ```Dart
 class HomePage extends StatefulWidget {
