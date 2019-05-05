@@ -15,7 +15,7 @@ The layout is pretty straightforward. We have a title (`Text`) and two inputs fi
 (`TextField`) wrapped in a `Column` widget. The first input field is used to enter the amount of euros
 and the second one to enter the mount of USD.
 
-[layout]: https://github.com/Nomeyho/flutter-input-sync/raw/master/article/layout.png "Layout"
+![layout](https://github.com/Nomeyho/flutter-input-sync/raw/master/article/layout.png "Layout")
 
 ```Dart
 class HomePage extends StatefulWidget {
@@ -173,7 +173,7 @@ The listeners will contain the logic to synchronize the two inputs:
 ```
 
 Result:
-[cursor_issue]: https://github.com/Nomeyho/flutter-input-sync/raw/master/article/1.gif "Cursor issue"
+![cursor_issue](https://github.com/Nomeyho/flutter-input-sync/raw/master/article/1.gif "Cursor issue")
 
 
 The cursor gets moved to the left of the input field, making it impossible to continue typing.
@@ -186,7 +186,7 @@ What's going on?
 In appearance nothing changed, but the value of the input field was replaced by the same value!
 This made the cursor position to be reset.
 
-[schema]: https://github.com/Nomeyho/flutter-input-sync/raw/master/article/schema.png "Schema"
+![schema](https://github.com/Nomeyho/flutter-input-sync/raw/master/article/schema.png "Schema")
 
 
 ## Attempt #2 - FocusNode
@@ -285,7 +285,7 @@ class _HomePageState extends State<HomePage> {
 ```
 
 Result:
-[final]: https://github.com/Nomeyho/flutter-input-sync/raw/master/article/2.gif "Final"
+![final](https://github.com/Nomeyho/flutter-input-sync/raw/master/article/2.gif "Final")
 
 
 ## Conclusion
@@ -294,7 +294,7 @@ Programmatically synchronizing multiple input fields can be tricky. In this arti
  objects are using them.
 
  The code is available here:
- [https://github.com/Nomeyho/flutter-input-sync](https://github.com/Nomeyho/flutter-input-sync)
+[https://github.com/Nomeyho/flutter-input-sync](https://github.com/Nomeyho/flutter-input-sync)
 
 ## Bonus
 How to set the initial value?
@@ -312,5 +312,5 @@ autofocus: true,
 ```
 to the first input to make sure that the listener is executed.
 
-[autofocus]: https://github.com/Nomeyho/flutter-input-sync/raw/master/article/3.gif "Autofocus"
+![autofocus](https://github.com/Nomeyho/flutter-input-sync/raw/master/article/3.gif "Autofocus")
 
