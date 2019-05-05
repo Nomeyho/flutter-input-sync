@@ -15,9 +15,9 @@ The layout is pretty straightforward. We have a title (`Text`) and two inputs fi
 (`TextField`) wrapped in a `Column` widget. The first input field is used to enter the amount of euros
 and the second one to enter the mount of USD.
 
-[IMAGE_1]
+[layout]: https://github.com/Nomeyho/flutter-input-sync/raw/master/article/layout.png "Layout"
 
-```
+```Dart
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
 
@@ -64,12 +64,12 @@ class _HomePageState extends State<HomePage> {
 ```
 ## The problem
 Most currency converters allow you to edit the value of a single currency at the time.
-You typically have to "swap" the currencies if you want to make the reverse conversion.
+You typically have to *swap* the currencies if you want to make the reverse conversion.
 They also often lack of reactivity. The converted value is not updated in real-time, as you are typing.
 You have to click on a button to perform the conversion and display the amount in the target currency.
 
-For this app, we need to have a "two-way" dataflow between the two inputs. This article describe
- a technique to achieve it with Flutter.
+For this app, we need to have a **two-way** dataflow between the two inputs. This article describes
+ a technique to solve those shortcomings with Flutter.
 
 ## Attempt #1 - TextInputController
 As we need to be able to get and set the value of an input field, we have no other choice than using a `TextEditingController`.
@@ -77,7 +77,7 @@ The `onChange` callback would only allow us to get the value of the input field.
 Let's create a controller for each input, attached a listener to each and pass them to the `TextField`s.
 The listeners will be called whenever the value of the input field changes.
 
-```
+```Dart
 class _HomePageState extends State<HomePage> {
   final _rate = 1.12;
   final _euroController = TextEditingController();
@@ -141,18 +141,18 @@ class _HomePageState extends State<HomePage> {
 ```
 
 The listeners will contain the logic to synchronize the two inputs:
-* `onEuroChange``:
+* `onEuroChange`:
     * get the value of the euro field (`_euroController.text`)
-    * parse it from `String` into a `double` (`double.tryParse`)
-    * compute the USD amount by multiplying the amount of Euro by the conversion rate (around `1.12` today)
-    * update the value of the USD field (`_usdController.value = TextEditingValue(...);`)
+    * parse the value from `String` into a `double` (`double.tryParse`)
+    * compute the USD amount by multiplying the amount of Euros by the conversion rate (around `1.12` today)
+    * update the value of the USD field (`_usdController.value = TextEditingValue(...)`)
 * `onUSDChange`:
     * get the value of the USD field (`_usdController.text`)
-    * parse it from `String` into a `double` (`double.tryParse`)
-    * compute the euro amount by dividing the amount of USD by the conversion rate
-    * update the value of the euro field (`_euroController.value = TextEditingValue(...);`)
+    * parse the value from `String` into a `double` (`double.tryParse`)
+    * compute the amount of Euros by dividing the amount of USD by the conversion rate
+    * update the value of the euro field (`_euroController.value = TextEditingValue(...)`)
 
-```
+```Dart
   onEuroChange() {
     final euro = double.tryParse(_euroController.text);
 
@@ -173,7 +173,8 @@ The listeners will contain the logic to synchronize the two inputs:
 ```
 
 Result:
-<VIDEO_1>
+[cursor_issue]: https://github.com/Nomeyho/flutter-input-sync/raw/master/article/1.gif "Cursor issue"
+
 
 The cursor gets moved to the left of the input field, making it impossible to continue typing.
 What's going on?
@@ -185,7 +186,8 @@ What's going on?
 In appearance nothing changed, but the value of the input field was replaced by the same value!
 This made the cursor position to be reset.
 
-<SCHEMA>
+[schema]: https://github.com/Nomeyho/flutter-input-sync/raw/master/article/schema.png "Schema"
+
 
 ## Attempt #2 - FocusNode
 Ideally, only steps 1 and 2 should be executed.
@@ -199,7 +201,7 @@ The `onUSDChange` would also be called but would immediately exit because it did
 Let's use the `FocusNode` object provided by Flutter to implement this solution.
 This object allows us to control the Widget having the focus on the screen.
 
-```
+```Dart
 class _HomePageState extends State<HomePage> {
   final _rate = 1.12;
   final _euroController = TextEditingController();
@@ -283,16 +285,20 @@ class _HomePageState extends State<HomePage> {
 ```
 
 Result:
-<image>
+[final]: https://github.com/Nomeyho/flutter-input-sync/raw/master/article/2.gif "Final"
+
 
 ## Conclusion
 Programmatically synchronizing multiple input fields can be tricky. In this article, we have seen
  a solution based on the `TextEditingController` and `FocusNode`. Dont forget to dispose those
  objects are using them.
 
+ The code is available here:
+ [https://github.com/Nomeyho/flutter-input-sync](https://github.com/Nomeyho/flutter-input-sync)
+
 ## Bonus
 How to set the initial value?
-```
+```Dart
 @override
 void initState() {
   ...
@@ -306,5 +312,5 @@ autofocus: true,
 ```
 to the first input to make sure that the listener is executed.
 
-## Github code
+[autofocus]: https://github.com/Nomeyho/flutter-input-sync/raw/master/article/3.gif "Autofocus"
 
