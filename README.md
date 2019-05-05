@@ -196,7 +196,7 @@ In appearance nothing changed, but the value of the input field was replaced by 
 This made the cursor position to be reset.
 
 <p align="center">
-  <img width="300"
+  <img width="450"
        src="https://github.com/Nomeyho/flutter-input-sync/raw/master/article/schema.png"
        alt="schema"
   />
@@ -327,10 +327,3 @@ and add
 autofocus: true,
 ```
 to the first input to make sure that the listener is executed.
-
-<p align="center">
-  <img width="300"
-       src="https://github.com/Nomeyho/flutter-input-sync/raw/master/article/3.gif"
-       alt="autofocus"
-  />
-</p>
