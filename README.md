@@ -16,7 +16,7 @@ The layout is pretty straightforward. We have a title (`Text`) and two inputs fi
 and the second one to enter the mount of USD.
 
 <p align="center">
-  <img height="200"
+  <img width="300"
        src="https://github.com/Nomeyho/flutter-input-sync/raw/master/article/layout.png"
        alt="layout"
   />
@@ -178,8 +178,12 @@ The listeners will contain the logic to synchronize the two inputs:
 ```
 
 Result:
-![cursor_issue](https://github.com/Nomeyho/flutter-input-sync/raw/master/article/1.gif "Cursor issue")
-
+<p align="center">
+  <img width="300"
+       src="https://github.com/Nomeyho/flutter-input-sync/raw/master/article/1.gif"
+       alt="cursor_issue"
+  />
+</p>
 
 The cursor gets moved to the left of the input field, making it impossible to continue typing.
 What's going on?
@@ -191,8 +195,12 @@ What's going on?
 In appearance nothing changed, but the value of the input field was replaced by the same value!
 This made the cursor position to be reset.
 
-![schema](https://github.com/Nomeyho/flutter-input-sync/raw/master/article/schema.png "Schema")
-
+<p align="center">
+  <img width="300"
+       src="https://github.com/Nomeyho/flutter-input-sync/raw/master/article/schema.png"
+       alt="schema"
+  />
+</p>
 
 ## Attempt #2 - FocusNode
 Ideally, only steps 1 and 2 should be executed.
@@ -289,9 +297,12 @@ class _HomePageState extends State<HomePage> {
 }
 ```
 
-Result:
-![final](https://github.com/Nomeyho/flutter-input-sync/raw/master/article/2.gif "Final")
-
+<p align="center">
+  <img width="300"
+       src="https://github.com/Nomeyho/flutter-input-sync/raw/master/article/2.gif"
+       alt="final"
+  />
+</p>
 
 ## Conclusion
 Programmatically synchronizing multiple input fields can be tricky. In this article, we have seen
@@ -317,5 +328,9 @@ autofocus: true,
 ```
 to the first input to make sure that the listener is executed.
 
-![autofocus](https://github.com/Nomeyho/flutter-input-sync/raw/master/article/3.gif "Autofocus")
-
+<p align="center">
+  <img width="300"
+       src="https://github.com/Nomeyho/flutter-input-sync/raw/master/article/3.gif"
+       alt="autofocus"
+  />
+</p>
